@@ -1,0 +1,192 @@
+/* ========================================== */
+/* 14. STYLE UNTUK FORM SURVEI (FEMININE)     */
+/* ========================================== */
+
+/* Mengatur desain kotak pilihan dan kotak teks */
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 14px 15px; /* Sedikit dilebarkan agar lebih lega */
+    margin-top: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #f0d5d6; /* Warna dasar pinggiran pink sangat pudar */
+    border-radius: 12px; /* Dibuat lebih membulat agar terkesan lembut */
+    font-family: inherit;
+    font-size: 16px; 
+    background-color: #fffafb; /* Latar belakang kotak putih dengan hint pink (snow) */
+    color: #5a4a4a; /* Warna teks abu-abu kecoklatan (warm) */
+    box-sizing: border-box;
+    transition: all 0.4s ease;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Efek Anggun saat kotak isian diklik (fokus) */
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #e5989b; /* Warna aksen Blush Pink / Rose */
+    box-shadow: 0 0 10px rgba(229, 152, 155, 0.3); /* Cahaya bayangan pink lembut */
+    background-color: #ffffff;
+}
+
+/* Gaya khusus untuk pemisah Bagian A, B, C */
+#survei-kajian h3 {
+    color: #c57b7d; /* Warna judul bagian pink kecoklatan */
+    border-bottom: 2px dashed #e8c3c4 !important; /* Garis bawah putus-putus manis */
+    padding-bottom: 10px;
+    font-size: 18px;
+}
+
+/* ========================================== */
+/* PENYESUAIAN UNTUK DARK MODE                */
+/* ========================================== */
+
+body.dark-mode .form-group select,
+body.dark-mode .form-group textarea {
+    background-color: #2c2425; /* Warna gelap dengan hint merah maroon hangat */
+    border-color: #544344;
+    color: #f1e6e6;
+}
+
+body.dark-mode .form-group select:focus,
+body.dark-mode .form-group textarea:focus {
+    border-color: #e5989b;
+    box-shadow: 0 0 10px rgba(229, 152, 155, 0.2);
+}
+
+body.dark-mode #survei-kajian h3 {
+    color: #e5989b;
+    border-bottom-color: #544344 !important;
+}
+
+/* ========================================== */
+/* RESPONSIVE DESIGN (KHUSUS HP)              */
+/* ========================================== */
+
+/* Pengaturan batas maksimal lebar form agar di laptop tidak terlalu memanjang */
+#survei-kajian {
+    max-width: 600px; /* Lebar ideal untuk form survei */
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box;
+    background-color: var(--bg-main, #ffffff);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* Penyesuaian khusus saat layar di bawah 768px (Ukuran HP) */
+@media (max-width: 768px) {
+    #survei-kajian {
+        width: 95%; /* Menyisakan sedikit jarak di kiri-kanan layar HP */
+        padding: 20px 15px; /* Mengurangi jarak dalam agar layar tidak terasa sempit */
+        margin-top: 20px !important;
+    }
+
+    #survei-kajian h2.title-kajian {
+        font-size: 24px !important; /* Mengecilkan sedikit judul di HP */
+    }
+
+    #survei-kajian h3 {
+        font-size: 16px;
+    }
+
+    .form-group select,
+    .form-group textarea {
+        padding: 12px; /* Sedikit dirampingkan untuk layar sentuh kecil */
+        /* Ukuran font TETAP 16px di sini agar browser iPhone (Safari) tidak melakukan auto-zoom saat diketik */
+    }
+}
+
+/* Penyesuaian shadow untuk Dark Mode */
+body.dark-mode #survei-kajian {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* ========================================== */
+/* 15. STYLE UNTUK POP-UP NOTIFIKASI SUKSES   */
+/* ========================================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(3px); /* Memberikan efek blur pada latar belakang */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 9999;
+}
+
+/* Class ini akan dipanggil oleh JavaScript untuk memunculkan modal */
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-box {
+    background: #fffafb;
+    padding: 30px 25px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 90%;
+    width: 320px;
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(229, 152, 155, 0.2);
+    border: 1px solid #f0d5d6;
+}
+
+.modal-overlay.show .modal-box {
+    transform: translateY(0) scale(1);
+}
+
+.modal-icon {
+    font-size: 45px;
+    margin-bottom: 10px;
+    animation: float 2s ease-in-out infinite;
+}
+
+.btn-tutup-anggun {
+    background-color: #e5989b;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 25px; /* Tombol membulat (pill) */
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-tutup-anggun:hover {
+    background-color: #c57b7d;
+    box-shadow: 0 4px 10px rgba(229, 152, 155, 0.4);
+}
+
+/* Animasi melayang untuk icon */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Penyesuaian Dark Mode untuk Pop-up */
+body.dark-mode .modal-box {
+    background: #2c2425;
+    border-color: #544344;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+body.dark-mode .modal-box p {
+    color: #f1e6e6 !important;
+}

@@ -1,0 +1,21 @@
+{
+  "short_name": "KajianMuslimah",
+  "name": "Pendaftaran Kajian Muslimah Spesial - Fiqih Darah",
+  "icons": [
+    {
+      "src": "https://via.placeholder.com/192/006400/ffffff?text=KM",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://via.placeholder.com/512/006400/ffffff?text=Kajian+Muslimah",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/index.html",
+  "background_color": "#faf8f5",
+  "theme_color": "#004d26",
+  "display": "standalone",
+  "orientation": "portrait"
+}

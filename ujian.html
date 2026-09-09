@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluasi & Ujian Kajian</title>
+    
+    <!-- Menghubungkan ke CSS Utama dan CSS Khusus Ujian (Baru) -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="ujian.css">
+    
+    <!-- FontAwesome untuk Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="container-ujian">
+        
+        <!-- Tombol Kembali ke Beranda -->
+        <a href="index.html" class="btn-kembali">
+            <i class="fas fa-heart" style="font-size: 12px; margin-right: 4px;"></i> Kembali ke Beranda
+        </a>
+
+        <!-- Judul Utama -->
+        <h2 class="judul-ujian">
+            <i class="fas fa-star"></i> Ruang Evaluasi Muslimah 
+            <span class="sub-judul">Jadikan ilmu yang didapat berkah dan tertanam di dalam dada ✨</span>
+        </h2>
+        
+        <hr class="garis-pembatas">
+
+        <!-- STEP 1: Validasi Nama Peserta & Token -->
+        <div id="ujian-auth-area">
+            <div class="auth-box">
+                <h4 style="margin: 0 0 5px 0;">Masukkan Nama Lengkap Anda</h4>
+                <small class="text-muted" style="display:block; margin-bottom: 15px;">*Gunakan nama yang sama saat pendaftaran kajian</small>
+                <input type="text" id="ujian-nama-input" placeholder="Contoh: Fulanah binti Fulan" class="input-elegan" style="margin-bottom: 15px;">
+                
+                <!-- KOLOM INPUT TOKEN (BARU) -->
+                <h4 style="margin: 0 0 5px 0;"><i class="fas fa-lock" style="color: var(--primary-pink); font-size: 14px; margin-right: 5px;"></i>Token / PIN Ujian</h4>
+                <small class="text-muted" style="display:block; margin-bottom: 15px;">*Token akan dibagikan oleh panitia saat waktu ujian dimulai</small>
+                <input type="text" id="ujian-pin-input" placeholder="Masukkan token di sini..." class="input-elegan" style="text-transform: uppercase;">
+
+                <button id="btn-mulai-ujian" class="btn-elegan">Buka & Mulai Ujian</button>
+                <small id="error-ujian-auth" class="text-error"></small>
+            </div>
+        </div>
+
+        <!-- STEP 2: Lembar Soal -->
+        <div id="ujian-soal-area" class="hidden">
+            <div class="peserta-aktif">
+                Peserta: <span id="nama-aktif-peserta"></span>
+            </div>
+            
+            <!-- Wadah Soal Dinamis (Di-render lewat JS) -->
+            <div id="konten-soal"></div>
+
+            <button id="btn-submit-ujian" class="btn-elegan" style="margin-top: 25px;">Kirim Semua Jawaban</button>
+            <small id="error-submit-ujian" class="text-error"></small>
+        </div>
+
+        <!-- STEP 3: Hasil Skor Akhir -->
+        <div id="ujian-hasil-area" class="hidden hasil-ujian-box">
+            <i class="fas fa-crown" style="font-size: 54px; color: var(--gold-accent); margin-bottom: 12px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));"></i>
+            <h3 class="judul-ujian" style="margin-bottom: 5px;">Barakallahu Fiik!</h3>
+            <p class="text-muted" style="margin: 0; font-size: 14px;">Nilai evaluasi Anda berhasil dicatat:</p>
+            
+            <h1 id="skor-akhir-peserta" class="skor-angka">0</h1>
+            
+            <p id="detail-skor-peserta" class="badge-skor"></p>
+        </div>
+
+        <hr class="garis-pembatas">
+
+        <!-- KLASEMEN / LEADERBOARD -->
+        <div id="area-klasemen">
+            <h3 class="judul-ujian"><i class="fas fa-trophy" style="color: #ffb300;"></i> Papan Skor Tertinggi</h3>
+            <p class="text-muted" style="margin-bottom: 15px;">Peringkat nilai peserta yang telah menyelesaikan ujian secara realtime.</p>
+            
+            <div style="overflow-x: auto;">
+                <table class="tabel-elegan">
+                    <thead>
+                        <tr>
+                            <th style="width: 70px; text-align: center;">Rank</th>
+                            <th style="text-align: left;">Nama Peserta</th>
+                            <th style="width: 100px; text-align: center;">Skor</th>
+                        </tr>
+                    </thead>
+                    <tbody id="body-klasemen">
+                        <tr>
+                            <td colspan="3" style="text-align: center;" class="text-muted">Memuat data peringkat...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             TAMBAHKAN KODE FOOTER DI SINI
+             ========================================== -->
+        <footer class="footer-ujian">
+            <p>&copy; 2026 Panitia Kajian Muslimah Al Futuh. Dibuat dengan <i class="fas fa-heart" style="color: var(--primary-pink); font-size: 12px;"></i></p>
+            <p class="doa-footer">"Semoga Allah memberkahi ilmu yang kita pelajari dan menjadikannya hujjah yang membela kita, bukan memberatkan kita."</p>
+        </footer>
+
+    </div>
+
+    <!-- Menghubungkan ke JavaScript khusus ujian -->
+    <script src="ujian.js"></script>
+</body>
+</html>

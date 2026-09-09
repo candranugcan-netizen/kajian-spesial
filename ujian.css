@@ -1,0 +1,246 @@
+/* =========================================================================
+   TEMA ELEGAN MUSLIMAH KHUSUS HALAMAN UJIAN
+   ========================================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-pink: #d4889c;       /* Dusty Rose */
+    --dark-pink: #b96d81;          /* Deep Rose */
+    --light-pink: #fdfafb;         /* Ultra Soft Pinkish White */
+    --cream-pink: #fff0f3;         /* Soft Rose Cream */
+    --text-plum: #4a3539;          /* Deep Plum Espresso */
+    --text-soft: #8c7377;          /* Soft Mauve Gray */
+    --gold-accent: #d4af37;        /* Champagne Gold */
+    --border-pink: #ebdbe0;        /* Delicate Pink-Gray Border */
+    --white: #ffffff;
+}
+
+body {
+    background-color: var(--light-pink);
+    color: var(--text-plum);
+    font-family: 'Poppins', sans-serif;
+    padding: 20px 10px;
+    margin: 0;
+}
+
+/* =========================================================================
+   KOMPONEN UTAMA
+   ========================================================================= */
+.container-ujian {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 30px;
+    background: linear-gradient(to bottom, var(--white), #fdfbfe);
+    border-radius: 20px;
+    border: 1px solid var(--border-pink);
+    box-shadow: 0 10px 30px rgba(212, 136, 156, 0.1);
+}
+
+.btn-kembali {
+    text-decoration: none;
+    color: var(--primary-pink);
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 25px;
+    transition: all 0.3s ease;
+}
+
+.btn-kembali:hover {
+    color: var(--dark-pink);
+    transform: translateX(-5px); /* Efek geser lembut saat di-hover */
+}
+
+/* Typography Khusus */
+.judul-ujian {
+    color: var(--text-plum);
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.judul-ujian i {
+    color: var(--gold-accent);
+}
+
+.sub-judul {
+    font-size: 14px;
+    font-weight: 400;
+    display: block;
+    margin-top: 5px;
+    color: var(--text-soft);
+}
+
+.garis-pembatas {
+    margin: 25px 0;
+    border: 0;
+    border-top: 1px dashed var(--border-pink);
+}
+
+/* =========================================================================
+   FORM & TOMBOL ELEGAN
+   ========================================================================= */
+.auth-box {
+    padding: 25px;
+    border: 1px solid var(--border-pink);
+    border-radius: 16px;
+    background: var(--cream-pink);
+    box-shadow: 0 4px 15px rgba(212, 136, 156, 0.05);
+}
+
+.input-elegan {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border-pink);
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.input-elegan:focus {
+    outline: none;
+    border-color: var(--primary-pink);
+    box-shadow: 0 0 0 3px rgba(212, 136, 156, 0.2);
+}
+
+.btn-elegan {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary-pink), #e29cae);
+    color: var(--white);
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+    box-shadow: 0 4px 15px rgba(212, 136, 156, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-elegan:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 136, 156, 0.4);
+    opacity: 0.95;
+}
+
+.btn-elegan:disabled {
+    background: var(--border-pink);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* =========================================================================
+   AREA UJIAN & HASIL
+   ========================================================================= */
+.peserta-aktif {
+    background: var(--cream-pink);
+    padding: 12px 18px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    font-weight: 600;
+    border: 1px solid var(--border-pink);
+    color: var(--text-plum);
+}
+
+.peserta-aktif span {
+    color: var(--primary-pink);
+}
+
+.hasil-ujian-box {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, var(--cream-pink), #fdf6f7);
+    border: 2px dashed var(--primary-pink);
+    border-radius: 20px;
+    margin-top: 25px;
+    box-shadow: 0 8px 30px rgba(212, 136, 156, 0.15);
+}
+
+.skor-angka {
+    font-size: 72px;
+    margin: 15px 0;
+    color: var(--primary-pink);
+    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+    text-shadow: 2px 2px 4px rgba(212, 136, 156, 0.2);
+}
+
+.badge-skor {
+    font-weight: 600;
+    color: var(--text-plum);
+    font-size: 14px;
+    background: var(--white);
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 25px;
+    border: 1px solid var(--border-pink);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+}
+
+/* =========================================================================
+   KLASEMEN LEADERBOARD
+   ========================================================================= */
+.tabel-elegan {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(212, 136, 156, 0.05);
+    border: 1px solid var(--border-pink);
+}
+
+.tabel-elegan th {
+    background-color: var(--cream-pink);
+    color: var(--text-plum);
+    padding: 15px;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tabel-elegan td {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-pink);
+    color: var(--text-plum);
+}
+
+.tabel-elegan tr:last-child td {
+    border-bottom: none;
+}
+
+.tabel-elegan tr:hover {
+    background-color: #fdf6f7;
+}
+
+/* Utilitas */
+.hidden { display: none !important; }
+.text-error { color: #d32f2f; display: block; margin-top: 10px; font-weight: 600; text-align: center; font-size: 13px; }
+.text-muted { color: var(--text-soft); font-size: 13px; }
+
+/* =========================================================================
+   FOOTER ELEGAN
+   ========================================================================= */
+.footer-ujian {
+    text-align: center;
+    padding: 30px 20px 20px 20px;
+    margin-top: 40px;
+    border-top: 1px dashed var(--border-pink);
+    color: var(--text-plum);
+    font-size: 14px;
+}
+
+.footer-ujian p {
+    margin: 5px 0;
+}
+
+.footer-ujian .doa-footer {
+    font-size: 12px;
+    color: var(--text-soft);
+    font-style: italic;
+    margin-top: 8px;
+}

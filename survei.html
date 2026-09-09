@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survei Kajian</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="survei.css">
+</head>
+<body>
+    <!-- ========================================== -->
+        <!-- SECTION SURVEI & EVALUASI KAJIAN           -->
+        <!-- ========================================== -->
+        <div id="survei-kajian" class="form-wrapper" style="margin-top: 40px;">
+            <h2 class="title-kajian" style="text-align: center;">Survei Evaluasi Kajian</h2>
+            <p style="text-align: center; margin-bottom: 25px;">Tanpa nama. Masukan objektif Anda sangat berarti untuk perbaikan kami selanjutnya.</p>
+
+            <form id="form-survei">
+                
+                <!-- BAGIAN A: PENILAIAN UMUM -->
+                <h3 style="margin-bottom: 15px; border-bottom: 1px solid #ccc; padding-bottom: 5px;">A. Penilaian Umum</h3>
+                <div class="form-group">
+                    <label for="kepuasan">Tingkat Kepuasan Keseluruhan:</label>
+                    <select id="kepuasan" name="kepuasan" required>
+                        <option value="" disabled selected>Pilih penilaian...</option>
+                        <option value="Sangat Baik">Sangat Baik</option>
+                        <option value="Baik">Baik</option>
+                        <option value="Cukup">Cukup</option>
+                        <option value="Kurang">Kurang</option>
+                    </select>
+                </div>
+
+                <!-- BAGIAN B: EVALUASI FASILITAS -->
+                <h3 style="margin-top: 25px; margin-bottom: 15px; border-bottom: 1px solid #ccc; padding-bottom: 5px;">B. Evaluasi Fasilitas</h3>
+                <div class="form-group">
+                    <label for="kenyamanan">Kenyamanan Tempat:</label>
+                    <select id="kenyamanan" name="kenyamanan" required>
+                        <option value="" disabled selected>Pilih penilaian...</option>
+                        <option value="Sangat Baik">Sangat Baik</option>
+                        <option value="Baik">Baik</option>
+                        <option value="Cukup">Cukup</option>
+                        <option value="Kurang">Kurang</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="audio">Kualitas Suara/Audio:</label>
+                    <select id="audio" name="audio" required>
+                        <option value="" disabled selected>Pilih penilaian...</option>
+                        <option value="Sangat Baik">Sangat Baik</option>
+                        <option value="Baik">Baik</option>
+                        <option value="Cukup">Cukup</option>
+                        <option value="Kurang">Kurang</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="konsumsi">Konsumsi:</label>
+                    <select id="konsumsi" name="konsumsi" required>
+                        <option value="" disabled selected>Pilih penilaian...</option>
+                        <option value="Sangat Baik">Sangat Baik</option>
+                        <option value="Baik">Baik</option>
+                        <option value="Cukup">Cukup</option>
+                        <option value="Kurang">Kurang</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="parkir">Area Parkir:</label>
+                    <select id="parkir" name="parkir" required>
+                        <option value="" disabled selected>Pilih penilaian...</option>
+                        <option value="Sangat Baik">Sangat Baik</option>
+                        <option value="Baik">Baik</option>
+                        <option value="Cukup">Cukup</option>
+                        <option value="Kurang">Kurang</option>
+                    </select>
+                </div>
+
+                <!-- BAGIAN C: HARAPAN KE DEPAN -->
+                <h3 style="margin-top: 25px; margin-bottom: 15px; border-bottom: 1px solid #ccc; padding-bottom: 5px;">C. Harapan ke Depan</h3>
+                <div class="form-group">
+                    <label for="setujuLanjut">Apakah Anda setuju kajian ini rutin diadakan lagi?</label>
+                    <select id="setujuLanjut" name="setujuLanjut" required>
+                        <option value="" disabled selected>Pilih jawaban...</option>
+                        <option value="Sangat Setuju">Sangat Setuju</option>
+                        <option value="Setuju">Setuju</option>
+                        <option value="Tidak Setuju">Tidak Setuju</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="waktu">Waktu pelaksanaan terbaik menurut Anda:</label>
+                    <select id="waktu" name="waktu" required>
+                        <option value="" disabled selected>Pilih waktu...</option>
+                        <option value="Pagi">Pagi</option>
+                        <option value="Sore">Sore</option>
+                        <option value="Malam (Ba'dha Maghrib)">Malam (Ba'dha Maghrib)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="lokasi">Pilihan lokasi kajian:</label>
+                    <select id="lokasi" name="lokasi" required>
+                        <option value="" disabled selected>Pilih lokasi...</option>
+                        <option value="Masjid">Masjid</option>
+                        <option value="Gedung Kajian">Gedung Kajian</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="modelDuduk">Pilihan model tempat duduk:</label>
+                    <select id="modelDuduk" name="modelDuduk" required>
+                        <option value="" disabled selected>Pilih model duduk...</option>
+                        <option value="Pakai Kursi">Pakai Kursi</option>
+                        <option value="Lesehan">Lesehan</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="tema">Usulan tema prioritas berikutnya:</label>
+                    <select id="tema" name="tema" required>
+                        <option value="" disabled selected>Pilih tema...</option>
+                        <option value="Akidah">Akidah</option>
+                        <option value="Fiqih">Fiqih</option>
+                        <option value="Muamalah">Muamalah</option>
+                        <option value="Adab/Akhlak">Adab/Akhlak</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="kritikSaran">Kritik dan Saran (Bebas):</label>
+                    <textarea id="kritikSaran" name="kritikSaran" rows="4" placeholder="Tulis masukan, ide, atau tema spesifik yang diinginkan..."></textarea>
+                </div>
+
+                <button type="submit" id="btn-submit-survei" class="btn-primary btn-full">Kirim Survei</button>
+
+                <!-- <button type="submit" id="btn-submit" class="btn-primary btn-full">
+                            <span id="btn-text">Bismillah, Daftar Sekarang</span>
+                            <span id="btn-loading" style="display: none;"><i class="fas fa-circle-notch fa-spin"></i> Memproses...</span>
+                        </button> -->
+            </form>
+        </div>
+
+        <!-- KOTAK POP-UP NOTIFIKASI SUKSES -->
+        <div id="modal-sukses" class="modal-overlay">
+            <div class="modal-box">
+                <div class="modal-icon">✨</div>
+                <h3 style="color: #c57b7d; margin-bottom: 10px;">Jazakumullah Khairan!</h3>
+                <p style="color: #5a4a4a; margin-bottom: 20px; font-size: 15px;">Survei Anda berhasil dikirim. Masukan Anda sangat berarti untuk perbaikan kami selanjutnya.</p>
+                <button id="btn-tutup-modal" class="btn-tutup-anggun">Tutup</button>
+            </div>
+        </div>
+
+
+
+            <script>
+            const SCRIPT_URL_SURVEI = 'https://script.google.com/macros/s/AKfycbyKmVyIcl7GTCzJhV8F-K2WiQTu99DO53vNVOrNxEs2CfUVe5Q-DXIXJ4izsL3oqXBK5g/exec'; 
+
+            const formSurvei = document.getElementById('form-survei');
+
+            if (formSurvei) {
+                formSurvei.addEventListener('submit', function(e) {
+                    e.preventDefault(); // Mencegah halaman me-reload
+
+                    const btnSubmit = document.getElementById('btn-submit-survei');
+                    const teksAsli = btnSubmit.innerHTML;
+                    
+                    // Ubah tombol menjadi mode loading
+                    btnSubmit.innerHTML = 'Mengirim...';
+                    btnSubmit.disabled = true;
+                    btnSubmit.style.opacity = '0.7';
+                    btnSubmit.style.cursor = 'not-allowed';
+
+                    // Ambil semua data dari dalam form
+                    const formData = new FormData(formSurvei);
+                    formData.append('action', 'submit_survei');
+
+                    // --- TAMBAHAN BARU: Mengubah format data agar diterima Google ---
+                    const urlParams = new URLSearchParams();
+                    for (const pair of formData.entries()) {
+                        urlParams.append(pair[0], pair[1]);
+                    }
+
+                    // Proses pengiriman data ke Google Apps Script menggunakan fetch
+                    fetch(SCRIPT_URL_SURVEI, { 
+                        method: 'POST', 
+                        mode: 'no-cors', // Ini kunci agar tidak error CORS
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: urlParams.toString() 
+                    })
+                    .then(() => {
+                        // TAMPILKAN POP-UP CUSTOM (Menggantikan alert bawaan)
+                        document.getElementById('modal-sukses').classList.add('show');
+                        
+                        // Kosongkan form setelah berhasil
+                        formSurvei.reset(); 
+                    })
+                    .catch(error => {
+                        console.error('Error!', error.message);
+                        alert('Gagal terhubung ke server. Pastikan koneksi internet Anda stabil.');
+                    })
+                    .finally(() => {
+                        // Kembalikan kondisi tombol seperti semula
+                        btnSubmit.innerHTML = teksAsli;
+                        btnSubmit.disabled = false;
+                        btnSubmit.style.opacity = '1';
+                        btnSubmit.style.cursor = 'pointer';
+                    });
+                });
+            }
+            // Fungsi untuk menutup pop-up notifikasi sukses
+                const btnTutupModal = document.getElementById('btn-tutup-modal');
+                const modalSukses = document.getElementById('modal-sukses');
+
+                if (btnTutupModal) {
+                    btnTutupModal.addEventListener('click', function() {
+                        modalSukses.classList.remove('show');
+                    });
+                }
+            </script>
+</body>
+</html>

@@ -1,0 +1,774 @@
+/* =========================================================================
+   1. VARIABLE WARNA & SETTING DASAR (Poster Theme: Emerald & Gold)
+   ========================================================================= */
+:root {
+    /* Skema Warna Utama Poster */
+    --primary: #004d26;           /* Hijau Masjid Al Futuh */
+    --primary-dark: #003319;      /* Hijau Tua / Pekat */
+    --primary-light: #0b6e3b;     /* Hijau Sedang */
+    --secondary: #d4af37;         /* Akses Emas / Gold */
+    --secondary-hover: #b89628;   /* Emas Gelap untuk Hover */
+    --gold-light: #fff5d6;        /* Emas Soft untuk Highlight */
+    
+    /* Warna Background & Kartu */
+    --bg-main: #ffffff;
+    --bg-cream: #f9f6f0;          /* Background Krem Soft */
+    --card-bg: #ffffff;
+    --border-color: #e5e7eb;
+    
+    /* Warna Teks */
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --text-light: #ffffff;
+    
+    /* Efek & Bayangan */
+    --shadow: 0 10px 30px rgba(0, 77, 38, 0.08);
+    --shadow-hover: 0 15px 35px rgba(0, 77, 38, 0.15);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 12px;
+}
+
+/* OVERRIDE MODE GELAP (DARK MODE) */
+body.dark-mode {
+    --primary: #0b6e3b;
+    --primary-dark: #053b1e;
+    --bg-main: #0a140e;
+    --bg-cream: #112017;
+    --card-bg: #14261c;
+    --border-color: #1e3a2b;
+    --text-main: #e2e8f0;
+    --text-muted: #94a3b8;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.section-padding {
+    padding: 70px 0;
+}
+
+.bg-cream {
+    background-color: var(--bg-cream);
+}
+
+/* =========================================================================
+   2. PRELOADER & FLOATING BUTTONS
+   ========================================================================= */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(212, 175, 55, 0.2);
+    border-top: 4px solid var(--secondary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Floating Theme Toggle & Back To Top */
+#theme-toggle, #back-to-top {
+    position: fixed;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: var(--card-bg);
+    color: var(--secondary);
+    border: 2px solid var(--secondary);
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    z-index: 99;
+    transition: var(--transition);
+}
+
+#theme-toggle { top: 20px; right: 20px; }
+#back-to-top { bottom: 85px; right: 20px; opacity: 0; visibility: hidden; }
+
+#back-to-top.show { opacity: 1; visibility: visible; }
+#theme-toggle:hover, #back-to-top:hover {
+    background-color: var(--secondary);
+    color: #000;
+    transform: translateY(-3px);
+}
+
+/* Sticky WhatsApp Button */
+.whatsapp-sticky {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    background-color: #25d366;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+    z-index: 99;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.whatsapp-sticky:hover {
+    transform: scale(1.1);
+}
+
+/* =========================================================================
+   3. HERO SECTION (Tampilan Atas Poster)
+   ========================================================================= */
+#hero {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+    color: var(--text-light);
+    padding: 80px 0 60px;
+    text-align: center;
+    position: relative;
+    border-bottom: 5px solid var(--secondary);
+}
+
+.logo-wrapper {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.logo-kajian {
+    width: 85px;
+    height: 85px;
+    object-fit: contain;
+    border-radius: 50%;
+    background-color: #ffffff;
+    padding: 7px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.subtitle-kajian {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--secondary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.title-kajian {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.desc-kajian {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.85);
+    font-style: italic;
+    margin-bottom: 30px;
+}
+
+/* Tombol Aksi Hero */
+.grup-tombol {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px;
+    background-color: var(--secondary);
+    color: #000;
+    font-weight: 600;
+    border-radius: 30px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    transition: var(--transition);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-hover);
+    transform: translateY(-2px);
+}
+
+/* Countdown Timer */
+.countdown-container {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 20px;
+    border-radius: var(--radius);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.countdown-container p {
+    font-size: 13px;
+    color: var(--secondary);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.cd-box {
+    background: var(--primary-dark);
+    border: 1px solid var(--secondary);
+    padding: 10px 15px;
+    border-radius: 8px;
+    min-width: 65px;
+}
+
+.cd-box span {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    display: block;
+}
+
+.cd-box small {
+    font-size: 10px;
+    color: var(--secondary);
+}
+
+/* =========================================================================
+   4. DETAIL KAJIAN & SECTION HEADER
+   ========================================================================= */
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title h2 {
+    font-size: 26px;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+body.dark-mode .section-title h2 {
+    color: var(--secondary);
+}
+
+.section-title p {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.divider {
+    width: 60px;
+    height: 4px;
+    background-color: var(--secondary);
+    margin: 12px auto 0;
+    border-radius: 2px;
+}
+
+.detail-card {
+    background-color: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 30px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+}
+
+.detail-card ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.detail-card li {
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.detail-card li i {
+    color: var(--secondary);
+    font-size: 18px;
+    width: 25px;
+    text-align: center;
+}
+
+/* =========================================================================
+   5. TATA TERTIB / ADAB MAJELIS
+   ========================================================================= */
+.tentang-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.tentang-item {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.tentang-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--secondary);
+}
+
+.icon-gold {
+    font-size: 32px;
+    color: var(--secondary);
+    margin-bottom: 15px;
+}
+
+.tentang-item h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: var(--primary);
+}
+
+body.dark-mode .tentang-item h3 {
+    color: var(--secondary);
+}
+
+.tentang-item p {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* =========================================================================
+   6. FORMULIR PENDAFTARAN
+   ========================================================================= */
+.form-wrapper {
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border-top: 5px solid var(--primary);
+}
+
+.badge {
+    display: inline-block;
+    background-color: var(--gold-light);
+    color: #8a6d0b;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-top: 10px;
+    border: 1px solid var(--secondary);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-size: 14px;
+    outline: none;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+
+/* =========================================================================
+   PERBAIKAN RADIO (JENIS KELAMIN) & CHECKBOX (TATA TERTIB)
+   ========================================================================= */
+
+/* Ukuran & warna standar input radio/checkbox */
+.radio-group input[type="radio"],
+.checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0; /* Mencegah ikon menciut saat teks terlipat ke bawah */
+    accent-color: var(--primary); /* Warna centang hijau sesuai tema */
+    cursor: pointer;
+    margin-top: 2px;
+}
+
+/* Styling Pilihan Jenis Kelamin */
+.radio-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 6px;
+}
+
+.radio-group label {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.radio-group label:hover {
+    border-color: var(--secondary);
+}
+
+/* Styling Checkbox Persetujuan Tata Tertib */
+.checkbox-group label {
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 400;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start; /* Kotak centang tetap sejajar di baris pertama */
+    gap: 10px;
+    padding: 12px 14px;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.checkbox-group label:hover {
+    border-color: var(--secondary);
+}
+
+/* Penyesuaian Responsif Mobile (HP) */
+@media (max-width: 768px) {
+    .radio-group {
+        flex-direction: column; /* Pilihan Ikhwan & Akhwat menumpuk rapi ke bawah */
+        gap: 10px;
+    }
+    
+    .radio-group label,
+    .checkbox-group label {
+        padding: 12px 15px; /* Menambah area sentuh jari di layar HP */
+    }
+}
+
+.error-msg {
+    color: #dc2626;
+    font-size: 12px;
+    display: none;
+    margin-top: 5px;
+}
+
+.btn-full {
+    width: 100%;
+    justify-content: center;
+    padding: 14px;
+    font-size: 16px;
+}
+
+/* =========================================================================
+   7. ACCORDION FAQ
+   ========================================================================= */
+.accordion {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.accordion-item {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.accordion-header {
+    width: 100%;
+    padding: 18px 20px;
+    text-align: left;
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-main);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.accordion-header i {
+    color: var(--secondary);
+    transition: transform 0.3s ease;
+}
+
+.accordion-header.active i {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding: 0 20px;
+    background-color: var(--bg-main);
+}
+
+.accordion-content p {
+    padding: 15px 0;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* =========================================================================
+   8. FOOTER
+   ========================================================================= */
+.footer {
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+    padding: 40px 0 20px;
+    border-top: 4px solid var(--secondary);
+}
+
+.footer h3 {
+    color: var(--secondary);
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+.social-links {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-links a {
+    color: #ffffff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.social-links a:hover {
+    background-color: var(--secondary);
+    color: #000;
+}
+
+.footer hr {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 20px 0;
+}
+
+.copyright {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* =========================================================================
+   9. TOAST & MODAL KEUANGAN
+   ========================================================================= */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background-color: #064e3b;
+    color: #ffffff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border-left: 5px solid var(--secondary);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 1000;
+    transition: var(--transition);
+}
+
+.toast.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+}
+
+.toast-icon { font-size: 24px; color: var(--secondary); }
+.toast-body h4 { font-size: 14px; margin-bottom: 2px; }
+.toast-body p { font-size: 12px; opacity: 0.9; }
+#close-toast { background: none; border: none; color: #fff; cursor: pointer; }
+
+/* Modal Laporan Keuangan Internal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 20px;
+}
+
+.modal-overlay.hidden { display: none; }
+
+.modal-content {
+    background-color: var(--card-bg);
+    width: 100%;
+    max-width: 600px;
+    border-radius: var(--radius);
+    padding: 30px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-top: 5px solid var(--secondary);
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.pin-input {
+    letter-spacing: 5px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.kas-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.kas-card {
+    background: var(--bg-cream);
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.card-saldo {
+    background: var(--primary);
+    color: #fff;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    margin-top: 15px;
+}
+
+.table-laporan {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.table-laporan th, .table-laporan td {
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+}
+
+.table-laporan th {
+    background-color: var(--bg-cream);
+    color: var(--primary);
+}
+
+/* =========================================================================
+   10. MEDIA QUERIES (RESPONSIF HP & TABLET)
+   ========================================================================= */
+@media (max-width: 768px) {
+    .title-kajian { font-size: 26px; }
+    .title-kajian span { font-size: 18px !important; }
+    .form-wrapper { padding: 25px 20px; }
+    .radio-group { flex-direction: column; gap: 8px; }
+    .kas-cards { grid-template-columns: 1fr; }
+    .toast { left: 15px; right: 15px; bottom: 15px; }
+}
