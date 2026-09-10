@@ -4,20 +4,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
-    --primary-pink: #d4889c;       /* Dusty Rose */
-    --dark-pink: #b96d81;          /* Deep Rose */
-    --light-pink: #fdfafb;         /* Ultra Soft Pinkish White */
-    --cream-pink: #fff0f3;         /* Soft Rose Cream */
-    --text-plum: #4a3539;          /* Deep Plum Espresso */
-    --text-soft: #8c7377;          /* Soft Mauve Gray */
-    --gold-accent: #d4af37;        /* Champagne Gold */
-    --border-pink: #ebdbe0;        /* Delicate Pink-Gray Border */
+    --primary: #004d26;
+    --primary-dark: #003319;
+    --primary-light: #0b6e3b;
+    --secondary: #d4af37;
+    --secondary-hover: #b89628;
+    --gold-light: #fff5d6;
+    --bg-main: #ffffff;
+    --bg-cream: #f9f6f0;
+    --card-bg: #ffffff;
+    --border-color: #e5e7eb;
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --text-light: #ffffff;
+    --shadow: 0 10px 30px rgba(0, 77, 38, 0.08);
     --white: #ffffff;
 }
 
 body {
-    background-color: var(--light-pink);
-    color: var(--text-plum);
+    background: linear-gradient(135deg, #edf6ef 0%, #f7f3eb 100%);
+    color: var(--text-main);
     font-family: 'Poppins', sans-serif;
     padding: 20px 10px;
     margin: 0;
@@ -30,15 +36,15 @@ body {
     max-width: 700px;
     margin: 20px auto;
     padding: 30px;
-    background: linear-gradient(to bottom, var(--white), #fdfbfe);
+    background: linear-gradient(to bottom, var(--white), #f9fbf8);
     border-radius: 20px;
-    border: 1px solid var(--border-pink);
-    box-shadow: 0 10px 30px rgba(212, 136, 156, 0.1);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
 }
 
 .btn-kembali {
     text-decoration: none;
-    color: var(--primary-pink);
+    color: var(--primary);
     font-weight: 600;
     display: inline-block;
     margin-bottom: 25px;
@@ -46,19 +52,19 @@ body {
 }
 
 .btn-kembali:hover {
-    color: var(--dark-pink);
-    transform: translateX(-5px); /* Efek geser lembut saat di-hover */
+    color: var(--primary-light);
+    transform: translateX(-5px);
 }
 
 /* Typography Khusus */
 .judul-ujian {
-    color: var(--text-plum);
+    color: var(--text-main);
     font-weight: 700;
     margin-bottom: 5px;
 }
 
 .judul-ujian i {
-    color: var(--gold-accent);
+    color: var(--secondary);
 }
 
 .sub-judul {
@@ -66,13 +72,13 @@ body {
     font-weight: 400;
     display: block;
     margin-top: 5px;
-    color: var(--text-soft);
+    color: var(--text-muted);
 }
 
 .garis-pembatas {
     margin: 25px 0;
     border: 0;
-    border-top: 1px dashed var(--border-pink);
+    border-top: 1px dashed var(--border-color);
 }
 
 /* =========================================================================
@@ -80,17 +86,17 @@ body {
    ========================================================================= */
 .auth-box {
     padding: 25px;
-    border: 1px solid var(--border-pink);
+    border: 1px solid var(--border-color);
     border-radius: 16px;
-    background: var(--cream-pink);
-    box-shadow: 0 4px 15px rgba(212, 136, 156, 0.05);
+    background: linear-gradient(135deg, #f7faf8 0%, #fdfbf6 100%);
+    box-shadow: 0 4px 15px rgba(0, 77, 38, 0.04);
 }
 
 .input-elegan {
     width: 100%;
     padding: 14px;
     border-radius: 10px;
-    border: 1px solid var(--border-pink);
+    border: 1px solid var(--border-color);
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
     box-sizing: border-box;
@@ -99,13 +105,13 @@ body {
 
 .input-elegan:focus {
     outline: none;
-    border-color: var(--primary-pink);
-    box-shadow: 0 0 0 3px rgba(212, 136, 156, 0.2);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 77, 38, 0.12);
 }
 
 .btn-elegan {
     width: 100%;
-    background: linear-gradient(135deg, var(--primary-pink), #e29cae);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
     color: var(--white);
     border: none;
     padding: 14px;
@@ -114,18 +120,18 @@ body {
     font-size: 16px;
     cursor: pointer;
     margin-top: 15px;
-    box-shadow: 0 4px 15px rgba(212, 136, 156, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 77, 38, 0.2);
     transition: all 0.3s ease;
 }
 
 .btn-elegan:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(212, 136, 156, 0.4);
-    opacity: 0.95;
+    box-shadow: 0 6px 20px rgba(0, 77, 38, 0.25);
+    opacity: 0.98;
 }
 
 .btn-elegan:disabled {
-    background: var(--border-pink);
+    background: var(--border-color);
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
@@ -135,47 +141,47 @@ body {
    AREA UJIAN & HASIL
    ========================================================================= */
 .peserta-aktif {
-    background: var(--cream-pink);
+    background: var(--gold-light);
     padding: 12px 18px;
     border-radius: 10px;
     margin-bottom: 25px;
     font-weight: 600;
-    border: 1px solid var(--border-pink);
-    color: var(--text-plum);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    color: var(--text-main);
 }
 
 .peserta-aktif span {
-    color: var(--primary-pink);
+    color: var(--primary);
 }
 
 .hasil-ujian-box {
     text-align: center;
     padding: 40px 20px;
-    background: linear-gradient(135deg, var(--cream-pink), #fdf6f7);
-    border: 2px dashed var(--primary-pink);
+    background: linear-gradient(135deg, #f7faf8 0%, #fffaf0 100%);
+    border: 2px dashed var(--secondary);
     border-radius: 20px;
     margin-top: 25px;
-    box-shadow: 0 8px 30px rgba(212, 136, 156, 0.15);
+    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.12);
 }
 
 .skor-angka {
     font-size: 72px;
     margin: 15px 0;
-    color: var(--primary-pink);
+    color: var(--primary);
     font-weight: 800;
     font-family: 'Montserrat', sans-serif;
-    text-shadow: 2px 2px 4px rgba(212, 136, 156, 0.2);
+    text-shadow: 2px 2px 4px rgba(0, 77, 38, 0.08);
 }
 
 .badge-skor {
     font-weight: 600;
-    color: var(--text-plum);
+    color: var(--text-main);
     font-size: 14px;
     background: var(--white);
     display: inline-block;
     padding: 8px 20px;
     border-radius: 25px;
-    border: 1px solid var(--border-pink);
+    border: 1px solid var(--border-color);
     box-shadow: 0 2px 10px rgba(0,0,0,0.02);
 }
 
@@ -189,13 +195,13 @@ body {
     background: var(--white);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(212, 136, 156, 0.05);
-    border: 1px solid var(--border-pink);
+    box-shadow: 0 4px 15px rgba(0, 77, 38, 0.04);
+    border: 1px solid var(--border-color);
 }
 
 .tabel-elegan th {
-    background-color: var(--cream-pink);
-    color: var(--text-plum);
+    background-color: #eef7f0;
+    color: var(--text-main);
     padding: 15px;
     font-weight: 600;
     font-size: 14px;
@@ -205,8 +211,8 @@ body {
 
 .tabel-elegan td {
     padding: 15px;
-    border-bottom: 1px solid var(--border-pink);
-    color: var(--text-plum);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-main);
 }
 
 .tabel-elegan tr:last-child td {
@@ -214,13 +220,13 @@ body {
 }
 
 .tabel-elegan tr:hover {
-    background-color: #fdf6f7;
+    background-color: #f5faf6;
 }
 
 /* Utilitas */
 .hidden { display: none !important; }
 .text-error { color: #d32f2f; display: block; margin-top: 10px; font-weight: 600; text-align: center; font-size: 13px; }
-.text-muted { color: var(--text-soft); font-size: 13px; }
+.text-muted { color: var(--text-muted); font-size: 13px; }
 
 /* =========================================================================
    FOOTER ELEGAN
@@ -229,8 +235,8 @@ body {
     text-align: center;
     padding: 30px 20px 20px 20px;
     margin-top: 40px;
-    border-top: 1px dashed var(--border-pink);
-    color: var(--text-plum);
+    border-top: 1px dashed var(--border-color);
+    color: var(--text-main);
     font-size: 14px;
 }
 
@@ -240,7 +246,7 @@ body {
 
 .footer-ujian .doa-footer {
     font-size: 12px;
-    color: var(--text-soft);
+    color: var(--text-muted);
     font-style: italic;
     margin-top: 8px;
 }

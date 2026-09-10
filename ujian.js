@@ -1,8 +1,8 @@
 // =========================================================================
 // KONFIGURASI API (Ganti dengan URL Google Apps Script Anda)
 // =========================================================================
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyKmVyIcl7GTCzJhV8F-K2WiQTu99DO53vNVOrNxEs2CfUVe5Q-DXIXJ4izsL3oqXBK5g/exec"; 
-const TOKEN_UJIAN_AKTIF = "20260829";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyaN7GSMJGYaCDOIJX-lhre6XSeGaBFCfu1f9gM5DiAGTv_GkD4hOx6qKpzl0uwGMy4JA/exec"; 
+const TOKEN_UJIAN_AKTIF = "20260910";
 
 // State data global untuk menyimpan daftar soal
 let bankSoalAktif = [];
@@ -110,7 +110,7 @@ function ambilSoalUjian(namaPeserta) {
                                 <label class="label-opsi"><input type="radio" name="soal_${soal.no}" value="A" style="margin-right:10px;"> A. ${soal.opsiA}</label>
                                 <label class="label-opsi"><input type="radio" name="soal_${soal.no}" value="B" style="margin-right:10px;"> B. ${soal.opsiB}</label>
                                 <label class="label-opsi"><input type="radio" name="soal_${soal.no}" value="C" style="margin-right:10px;"> C. ${soal.opsiC}</label>
-                                <label class="label-opsi"><input type="radio" name="soal_${soal.no}" value="D" style="margin-right:10px;"> D. ${soal.opsiD}</label>
+                                
                             </div>
                         </div>
                     `;
