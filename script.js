@@ -1,7 +1,7 @@
 // =========================================================================
 // 1. KONFIGURASI UTAMA (PASTE URL WEB APP ANDA DI SINI)
 // =========================================================================
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyaN7GSMJGYaCDOIJX-lhre6XSeGaBFCfu1f9gM5DiAGTv_GkD4hOx6qKpzl0uwGMy4JA/exec"; 
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxyKOTNKonxzp6lp2V0WMc4xM7fhrmX9hftUiYnCUWxjMjxbp4zHEox-fLQtvYyB96k_A/exec"; 
 // Contoh format: https://script.google.com/macros/s/XXXXX/exec
 
 // Tanggal Target Kajian untuk Countdown (Format: YYYY-MM-DDTHH:MM:SS)

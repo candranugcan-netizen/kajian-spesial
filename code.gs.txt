@@ -1,0 +1,232 @@
+// =========================================================================
+// KONFIGURASI UTAMA
+// =========================================================================
+const SHEET_PENDAFTARAN = 'Sheet1';
+const SHEET_KEUANGAN = 'Keuangan';
+const SHEET_SOAL = 'Soal';
+const SHEET_NILAI = 'Nilai';
+const SHEET_SURVEI = 'Survei';
+
+// Ganti angka ini dengan PIN yang Anda inginkan untuk mengakses keuangan
+const PIN_KEUANGAN = "123456"; 
+
+// Fungsi bantuan untuk mengirim balasan berupa JSON ke website
+function sendResponse(status, data, message = "") {
+  return ContentService.createTextOutput(JSON.stringify({
+    status: status,
+    data: data,
+    message: message
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+// =========================================================================
+// FUNGSI POST (Menerima Data dari Website: Form Daftar, Ujian, & Keuangan)
+// =========================================================================
+function doPost(e) {
+  try {
+    const data = e.parameter;
+    // Jika tidak ada parameter action, anggap ini dari form pendaftaran (kode lama)
+    const action = data.action || 'register'; 
+
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+
+    // 1. PINTU PENDAFTARAN (Kajian)
+    if (action === 'register') {
+      const sheet = ss.getSheetByName(SHEET_PENDAFTARAN);
+      sheet.appendRow([
+        new Date(), data.nama, data.whatsapp, data.alamat, data.usia,
+        data.gender, data.sumber, data.catatan, data.bersedia, data.ip, data.userAgent
+      ]);
+      return sendResponse("success", null, "Data pendaftaran berhasil disimpan");
+    } 
+    
+    // 2. PINTU KUMPUL UJIAN
+    else if (action === 'submit_ujian') {
+      const namaPeserta = data.nama.trim();
+      const jawabanUser = JSON.parse(data.jawaban); 
+      
+      const sheetNilai = ss.getSheetByName(SHEET_NILAI);
+      const dataNilai = sheetNilai.getDataRange().getValues();
+      
+      // Validasi Ganda
+      const namaSudahAda = dataNilai.some((row, index) => index > 0 && row[1].toString().toLowerCase() === namaPeserta.toLowerCase());
+      if(namaSudahAda) {
+        return sendResponse("error", null, "Nama sudah terdaftar di database ujian!");
+      }
+
+      const sheetSoal = ss.getSheetByName(SHEET_SOAL);
+      const dataSoal = sheetSoal.getDataRange().getValues();
+      
+      let skorBenar = 0;
+      let totalSoal = dataSoal.length - 1; 
+
+      for (let i = 1; i <= totalSoal; i++) {
+        let noSoal = dataSoal[i][0].toString();
+        let kunciJawaban = dataSoal[i][6].toString().trim().toUpperCase();
+        
+        if (jawabanUser[noSoal] && jawabanUser[noSoal].toUpperCase() === kunciJawaban) {
+          skorBenar++;
+        }
+      }
+
+      let nilaiAkhir = Math.round((skorBenar / totalSoal) * 100);
+
+      // Durasi pengerjaan dalam detik (sejak lembar soal dibuka sampai submit)
+      const durasiDetik = parseInt(data.waktu, 10) || 0;
+
+      // Susunan kolom Nilai: Timestamp | Nama | Skor | Waktu (detik)
+      sheetNilai.appendRow([new Date(), namaPeserta, nilaiAkhir, durasiDetik]);
+      
+      return sendResponse("success", { skor: nilaiAkhir, benar: skorBenar, total: totalSoal }, "Ujian berhasil dikumpulkan");
+    }
+
+    // 3. PINTU TAMBAH DATA KEUANGAN (BARU)
+    else if (action === 'add_keuangan') {
+      // Cek PIN demi keamanan
+      if (data.pin !== PIN_KEUANGAN) {
+        return sendResponse("error", null, "PIN Salah! Gagal menyimpan data.");
+      }
+
+      const sheetKeuangan = ss.getSheetByName(SHEET_KEUANGAN);
+      const lastRow = sheetKeuangan.getLastRow();
+      
+      // Ambil saldo terakhir untuk dikalkulasi
+      let saldoSebelumnya = 0;
+      if (lastRow > 1) { // Pastikan bukan header
+        // Asumsi kolom ke-5 (E) adalah kolom Saldo
+        saldoSebelumnya = parseFloat(sheetKeuangan.getRange(lastRow, 5).getValue()) || 0; 
+      }
+
+      // Siapkan data nominal
+      let nominalMasuk = parseFloat(data.nominal);
+      
+      let masuk = 0;
+      let keluar = 0;
+      
+      if (data.jenis === 'Masuk') {
+        masuk = nominalMasuk;
+      } else {
+        keluar = nominalMasuk;
+      }
+
+      // Hitung Saldo Akhir
+      let saldoBaru = saldoSebelumnya + masuk - keluar;
+
+      // Masukkan ke Spreadsheet (Asumsi susunan kolom: Tanggal | Keterangan | Masuk | Keluar | Saldo)
+      sheetKeuangan.appendRow([data.tanggal, data.keterangan, masuk, keluar, saldoBaru]);
+
+      return sendResponse("success", null, "Data keuangan berhasil ditambahkan");
+    }
+
+    // 4. PINTU SUBMIT SURVEI (BARU)
+    else if (action === 'submit_survei') {
+      const sheetSurvei = ss.getSheetByName(SHEET_SURVEI);
+      
+      // Memasukkan data ke baris baru sesuai urutan kolom A sampai L
+      sheetSurvei.appendRow([
+        new Date(),             // Kolom A: Timestamp
+        data.kepuasan,          // Kolom B: Tingkat Kepuasan
+        data.kenyamanan,        // Kolom C: Kenyamanan Tempat
+        data.audio,             // Kolom D: Suara/Audio
+        data.konsumsi,          // Kolom E: Konsumsi
+        data.parkir,            // Kolom F: Parkir
+        data.setujuLanjut,      // Kolom G: Setuju Diadakan
+        data.waktu,             // Kolom H: Waktu Terbaik
+        data.lokasi,            // Kolom I: Lokasi Pilihan
+        data.modelDuduk,        // Kolom J: Model Duduk
+        data.tema,              // Kolom K: Tema Berikutnya
+        data.kritikSaran        // Kolom L: Kritik dan Saran
+      ]);
+
+      return sendResponse("success", null, "Jazakumullah khairan! Survei Anda berhasil dikirim.");
+    }
+
+  } catch (error) {
+    return sendResponse("error", null, error.message);
+  }
+}
+
+// =========================================================================
+// FUNGSI GET (Mengirim Data ke Website: Counter, Keuangan, Cek Nama, Soal, Klasemen)
+// =========================================================================
+function doGet(e) {
+  try {
+    const action = (e.parameter && e.parameter.action) ? e.parameter.action : 'get_counter';
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+
+    // 1. PINTU COUNTER (Jumlah pendaftar - kode lama)
+    if (action === 'get_counter') {
+      const sheet = ss.getSheetByName(SHEET_PENDAFTARAN);
+      return sendResponse("success", { count: sheet.getLastRow() - 1 });
+    }
+    
+    // 2. PINTU KEUANGAN (Butuh PIN)
+    else if (action === 'get_keuangan') {
+      const pinMasuk = e.parameter.pin;
+      if (pinMasuk !== PIN_KEUANGAN) {
+        return sendResponse("error", null, "PIN Salah! Akses ditolak.");
+      }
+      
+      const sheet = ss.getSheetByName(SHEET_KEUANGAN);
+      const data = sheet.getDataRange().getDisplayValues(); // getDisplayValues agar format tanggal/mata uang rapi
+      return sendResponse("success", data.slice(1)); // Kirim data tanpa header
+    }
+    
+    // 3. PINTU CEK NAMA (Sebelum masuk ujian)
+    else if (action === 'check_name') {
+      const namaDicari = e.parameter.nama.trim().toLowerCase();
+      const sheet = ss.getSheetByName(SHEET_NILAI);
+      const data = sheet.getDataRange().getValues();
+      
+      // Cek apakah nama sudah ada (mengabaikan baris 1/header)
+      const isExist = data.some((row, index) => index > 0 && row[1].toString().trim().toLowerCase() === namaDicari);
+      return sendResponse("success", { exists: isExist });
+    }
+    
+    // 4. PINTU AMBIL SOAL (Tanpa kunci jawaban agar tidak bisa dicontek lewat inspect element)
+    else if (action === 'get_soal') {
+      const sheet = ss.getSheetByName(SHEET_SOAL);
+      const data = sheet.getDataRange().getValues();
+      
+      let kumpulanSoal = [];
+      for (let i = 1; i < data.length; i++) {
+        kumpulanSoal.push({
+          no: data[i][0],
+          pertanyaan: data[i][1],
+          opsiA: data[i][2],
+          opsiB: data[i][3],
+          opsiC: data[i][4],
+          opsiD: data[i][5]
+        });
+      }
+      return sendResponse("success", kumpulanSoal);
+    }
+    
+    // 5. PINTU KLASEMEN (Leaderboard)
+    else if (action === 'get_klasemen') {
+      const sheet = ss.getSheetByName(SHEET_NILAI);
+      const data = sheet.getDataRange().getValues();
+      
+      let klasemen = [];
+      for (let i = 1; i < data.length; i++) {
+        // Baris lama yang belum punya kolom waktu diberi nilai besar agar tidak memenangkan tie-break
+        const waktuBaris = (data[i][3] !== undefined && data[i][3] !== null && data[i][3] !== '')
+          ? Number(data[i][3]) || 0
+          : 999999;
+        klasemen.push({
+          nama: data[i][1],
+          skor: data[i][2],
+          waktu: waktuBaris
+        });
+      }
+
+      // Urutkan dari nilai tertinggi; jika skor sama, yang waktu pengerjaannya paling cepat menang
+      klasemen.sort((a, b) => (b.skor - a.skor) || (a.waktu - b.waktu));
+      
+      return sendResponse("success", klasemen);
+    }
+
+  } catch (error) {
+    return sendResponse("error", null, error.message);
+  }
+}

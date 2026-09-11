@@ -1,11 +1,43 @@
 // =========================================================================
 // KONFIGURASI API (Ganti dengan URL Google Apps Script Anda)
 // =========================================================================
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyaN7GSMJGYaCDOIJX-lhre6XSeGaBFCfu1f9gM5DiAGTv_GkD4hOx6qKpzl0uwGMy4JA/exec"; 
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxyKOTNKonxzp6lp2V0WMc4xM7fhrmX9hftUiYnCUWxjMjxbp4zHEox-fLQtvYyB96k_A/exec"; 
 const TOKEN_UJIAN_AKTIF = "20260910";
 
 // State data global untuk menyimpan daftar soal
 let bankSoalAktif = [];
+
+// State pencatat waktu ujian (dihitung sejak soal tampil sampai submit)
+let waktuMulaiUjian = null;
+let timerIntervalUjian = null;
+
+// Format detik menjadi teks "X mnt Y dtk" / "Y dtk"
+function formatWaktuUjian(totalDetik) {
+    const detik = Math.max(0, Math.round(totalDetik));
+    const mnt = Math.floor(detik / 60);
+    const dtk = detik % 60;
+    if (mnt === 0) return `${dtk} dtk`;
+    return `${mnt} mnt ${dtk} dtk`;
+}
+
+// Mulai stopwatch di layar peserta
+function mulaiTimerUjian() {
+    waktuMulaiUjian = Date.now();
+    const elTimer = document.getElementById('timer-ujian');
+    if (timerIntervalUjian) clearInterval(timerIntervalUjian);
+    timerIntervalUjian = setInterval(() => {
+        if (elTimer) {
+            elTimer.innerText = formatWaktuUjian((Date.now() - waktuMulaiUjian) / 1000);
+        }
+    }, 1000);
+}
+
+function hentikanTimerUjian() {
+    if (timerIntervalUjian) {
+        clearInterval(timerIntervalUjian);
+        timerIntervalUjian = null;
+    }
+}
 
 // Elemen DOM Ujian
 const ujianAuthArea = document.getElementById('ujian-auth-area');
@@ -28,7 +60,7 @@ function muatKlasemen() {
             if (res.status === 'success') {
                 bodyKlasemen.innerHTML = '';
                 if (res.data.length === 0) {
-                    bodyKlasemen.innerHTML = '<tr><td colspan="3" style="text-align:center;">Belum ada peserta yang ujian.</td></tr>';
+                    bodyKlasemen.innerHTML = '<tr><td colspan="4" style="text-align:center;">Belum ada peserta yang ujian.</td></tr>';
                     return;
                 }
                 res.data.forEach((peserta, index) => {
@@ -37,18 +69,23 @@ function muatKlasemen() {
                     else if (index === 1) piala = '🥈';
                     else if (index === 2) piala = '🥉';
 
+                    const waktuTampil = (peserta.waktu !== undefined && peserta.waktu !== null && peserta.waktu !== '')
+                        ? formatWaktuUjian(peserta.waktu)
+                        : '-';
+
                     bodyKlasemen.innerHTML += `
                         <tr>
                             <td style="text-align: center; font-weight: bold;">${piala}</td>
                             <td>${peserta.nama}</td>
                             <td style="text-align: center; font-weight: bold; color: var(--primary);">${peserta.skor}</td>
+                            <td style="text-align: center;">${waktuTampil}</td>
                         </tr>
                     `;
                 });
             }
         })
         .catch(() => {
-            bodyKlasemen.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#d32f2f;">Gagal memuat klasemen.</td></tr>';
+            bodyKlasemen.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#d32f2f;">Gagal memuat klasemen.</td></tr>';
         });
 }
 
@@ -119,6 +156,9 @@ function ambilSoalUjian(namaPeserta) {
                 namaAktifPeserta.innerText = namaPeserta;
                 ujianAuthArea.classList.add('hidden');
                 ujianSoalArea.classList.remove('hidden');
+
+                // Waktu pengerjaan mulai dihitung sejak lembar soal ini tampil
+                mulaiTimerUjian();
             } else {
                 errorUjianAuth.innerText = "Gagal mengambil lembar soal.";
             }
@@ -154,6 +194,10 @@ btnSubmitUjian.addEventListener('click', () => {
 
     if (!confirm("Apakah Anda yakin ingin mengumpulkan semua jawaban sekarang?")) return;
 
+    // Durasi pengerjaan: sejak lembar soal dibuka sampai tombol submit ditekan
+    hentikanTimerUjian();
+    const durasiDetik = waktuMulaiUjian ? Math.round((Date.now() - waktuMulaiUjian) / 1000) : 0;
+
     btnSubmitUjian.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim & Memeriksa Jawaban...';
     btnSubmitUjian.disabled = true;
     errorSubmitUjian.innerText = "";
@@ -162,6 +206,7 @@ btnSubmitUjian.addEventListener('click', () => {
     urlParams.append('action', 'submit_ujian');
     urlParams.append('nama', nama);
     urlParams.append('jawaban', JSON.stringify(paketJawaban));
+    urlParams.append('waktu', durasiDetik);
 
     fetch(WEB_APP_URL, {
         method: 'POST',
@@ -183,7 +228,10 @@ btnSubmitUjian.addEventListener('click', () => {
                     const dataUser = res.data.find(p => p.nama.toLowerCase() === nama.toLowerCase());
                     if (dataUser) {
                         document.getElementById('skor-akhir-peserta').innerText = dataUser.skor;
-                        document.getElementById('detail-skor-peserta').innerText = `Barakallahu fiik, lembar jawaban Anda berhasil diperiksa.`;
+                        const waktuTampil = (dataUser.waktu !== undefined && dataUser.waktu !== null && dataUser.waktu !== '')
+                            ? formatWaktuUjian(dataUser.waktu)
+                            : formatWaktuUjian(durasiDetik);
+                        document.getElementById('detail-skor-peserta').innerText = `Barakallahu fiik, lembar jawaban Anda berhasil diperiksa. Waktu pengerjaan: ${waktuTampil}.`;
                     }
                 });
         }, 2500);

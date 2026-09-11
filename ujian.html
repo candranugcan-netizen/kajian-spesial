@@ -50,6 +50,7 @@
         <div id="ujian-soal-area" class="hidden">
             <div class="peserta-aktif">
                 Peserta: <span id="nama-aktif-peserta"></span>
+                &nbsp;|&nbsp; <i class="fas fa-stopwatch" style="font-size: 12px;"></i> Waktu: <span id="timer-ujian" style="font-weight: bold;">0 dtk</span>
             </div>
             
             <!-- Wadah Soal Dinamis (Di-render lewat JS) -->
@@ -75,7 +76,7 @@
         <!-- KLASEMEN / LEADERBOARD -->
         <div id="area-klasemen">
             <h3 class="judul-ujian"><i class="fas fa-trophy" style="color: #ffb300;"></i> Papan Skor Tertinggi</h3>
-            <p class="text-muted" style="margin-bottom: 15px;">Peringkat nilai peserta yang telah menyelesaikan ujian secara realtime.</p>
+            <p class="text-muted" style="margin-bottom: 15px;">Peringkat peserta yang telah menyelesaikan ujian secara realtime — diurutkan dari nilai tertinggi, lalu waktu pengerjaan tercepat.</p>
             
             <div style="overflow-x: auto;">
                 <table class="tabel-elegan">
@@ -84,11 +85,12 @@
                             <th style="width: 70px; text-align: center;">Rank</th>
                             <th style="text-align: left;">Nama Peserta</th>
                             <th style="width: 100px; text-align: center;">Skor</th>
+                            <th style="width: 120px; text-align: center;">Waktu</th>
                         </tr>
                     </thead>
                     <tbody id="body-klasemen">
                         <tr>
-                            <td colspan="3" style="text-align: center;" class="text-muted">Memuat data peringkat...</td>
+                            <td colspan="4" style="text-align: center;" class="text-muted">Memuat data peringkat...</td>
                         </tr>
                     </tbody>
                 </table>
